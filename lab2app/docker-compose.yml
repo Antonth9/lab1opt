@@ -1,0 +1,15 @@
+version: '3.8'
+
+services:
+  backend:
+    build: ./backend
+    container_name: lab2-backend
+    # Порт наружу не пробрасываем, он нужен только внутри сети Docker
+
+  frontend:
+    build: ./frontend
+    container_name: lab2-frontend
+    ports:
+      - "80:80" # Порт 80 хоста (VM) -> Порт 80 контейнера
+    depends_on:
+      - backend
