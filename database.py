@@ -23,27 +23,6 @@ def save_data(fieldnames, rows, filename=FILENAME):
         writer.writerows(rows)
 
 
-def show_table(fieldnames, rows):
-    """Красиво выводит таблицу."""
-    if not rows:
-        print("\n[!] Таблица пуста.")
-        return
-
-    widths = {f: len(f) for f in fieldnames}
-    for row in rows:
-        for f in fieldnames:
-            widths[f] = max(widths[f], len(str(row.get(f, ""))))
-
-    header = " | ".join(f"{f:<{widths[f]}}" for f in fieldnames)
-    print("\n" + "-" * len(header))
-    print(header)
-    print("-" * len(header))
-    for row in rows:
-        print(" | ".join(f"{str(row.get(f, '')):<{widths[f]}}" for f in fieldnames))
-    print("-" * len(header))
-    print(f"Всего записей: {len(rows)}")
-
-
 def init_database():
     """Создаёт пустую БД, если её нет."""
     if not os.path.exists(FILENAME):
